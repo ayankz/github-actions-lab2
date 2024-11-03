@@ -1,9 +1,11 @@
 name: Installing Python
-'on':
+
+on:
   - push
+
 jobs:
   build:
-    runs-on: '${{ matrix.os }}'
+    runs-on: ${{ matrix.os }} 
     strategy:
       matrix:
         os:
@@ -14,11 +16,12 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
-        exclude: #added
-          - os: macos-12 #added
-            py-version: 3.9 #added
+        exclude:  # Исключения определяются на том же уровне, что и матрица
+          - os: macos-12
+            py-version: 3.9  # Исключение для macOS 12 и Python 3.9
+
     steps:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '${{ matrix.py-version }}'
+          python-version: ${{ matrix.py-version }}  # Убираем кавычки
